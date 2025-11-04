@@ -1,0 +1,13 @@
+# Ignore dataset folders
+data/
+results/
+checkpoints/
+
+# Ignore caches
+__pycache__/
+*.pyc
+*.pyo
+*.DS_Store
+*.zip
+*.tar
+*.gz
