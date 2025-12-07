@@ -1,26 +1,36 @@
-BACKBONE: ResNet18_pretrained
-OPTIMIZER: SGD
-CL_METHOD: Replay
+BACKBONE: "ResNet18_pretrained"
+DEVICE: "cuda"
 
-# Dataset settings
-DATASET_NAME: "mvtec+loco"
+# anomaly-memory pipeline settings (safe)
+MEMORY_SAMPLES_PER_TASK: 2000
+MEMORY_SUBSAMPLE: 1
+BATCH_SIZE: 64
+SEED: 42
+
+# dataset roots
 MVT_ROOT: "data/mvtec"
 MVT_LOCO_ROOT: "data/mvtec-loco"
 
-# Training
-EPOCHS_PER_TASK: 8
-BATCH_SIZE: 32
-SGD_LR: 0.0005
-SGD_MOMENTUM: 0.9
-ADAM_LR: 0.0005
-FREEZE_BACKBONE: True
+# *** REQUIRED FOR CL BENCHMARK SYSTEM ***
+OUTDIR_ROOT: "results/mvtec+loco/CL"
 
-# Replay Buffer
-REPLAY_BUFFER_SIZE_PER_CLASS: 80
+# continual learning training settings
+CL_METHOD: "Finetune"
+OPTIMIZER: "SGD"
+EPOCHS_PER_TASK: 3
+
+SGD_LR: 0.003
+SGD_MOMENTUM: 0.9
+WEIGHT_DECAY: 0.0
+ADAM_LR: 0.0005
+
+# Replay
+REPLAY_MAX_SAMPLES: 2000
 REPLAY_BATCH_SIZE: 32
 
-# System
-DEVICE: cuda
-SEED: 42
-MOMENTUM: 0.9       # FIXED
-WEIGHT_DECAY: 0.0
+# EWC
+EWC_LAMBDA: 10.0
+
+# LwF
+LWF_LAMBDA: 1.0
+LWF_TEMPERATURE: 2.0
