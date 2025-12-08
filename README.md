@@ -1,27 +1,140 @@
-# Continual Anomaly Detection
+# Continual Anomaly Detection using ViT + DNE with Continual Learning (CL)
 
-Official code for ACMMM 2022 paper: 
+## 📌 Overview
+This project implements a **Continual Anomaly Detection system** that can learn incrementally across industrial anomaly detection tasks without catastrophic forgetting.
 
-**Title:** Towards Continual Adaptation in Industrial Anomaly Detection  [[pdf]](https://dl.acm.org/doi/pdf/10.1145/3503161.3548232?casa_token=DjLhJL0kQl8AAAAA:AQyuwCMk4m_bNFtyfFi3YJu-lHa7-EIRrdgztanRKsf5f0535ROUoponI9gAZIrx4_PrUDjta64dNg). 
+It is built using:
+- **Vision Transformer (ViT)** as the backbone  
+- **DNE (Distribution Normalization Embedding)** anomaly detection method  
+- **Continual Learning (CL)** strategies  
+- **MVTec AD + LOCO** datasets  
 
+The system evaluates AUC, accuracy degradation, and CL memory performance.
 
-## Datasets
-To train on the MVTec Anomaly Detection dataset [download](https://www.mvtec.com/company/research/datasets/mvtec-ad) 
-the data and extract it. For the additional Magnetic Tile Defects dataset, we [download](https://github.com/abin24/Magnetic-tile-defect-datasets.) the data then run **datasets/utils/make_mtd_ano.py** for anomaly detection.
+---
 
-## Enviroment setup
+## 🎯 Objectives
+1. Train anomaly detection sequentially across tasks  
+2. Prevent catastrophic forgetting using CL  
+3. Integrate **GPM memory** + DNE normalization  
+4. Log performance metrics (AUC, accuracy matrix)  
+5. Produce anomaly visualizations  
+
+---
+
+## 📚 Datasets
+### **MVTec AD**
+Examples:
+- Hazelnut  
+- Zipper  
+- Screw  
+- Leather  
+- Transistor  
+
+### **LOCO**
+- Splicing connectors  
+- Breakfast box  
+- Screw bag  
+- Pushpins  
+
+Dataset structure:
+```
+data/
+   mvtec/
+   loco/
+```
+
+---
+
+## 🧠 Methodology
+
+### 🔸 Vision Transformer (ViT)
+Extracts high-dimensional patch embeddings.
+
+### 🔸 DNE
+Normalizes distributions to stabilize anomaly scoring across tasks.
+
+### 🔸 Continual Learning Loop
+```
+Task i → Train → Extract Features → DNE → Save Memory → Evaluate
+```
+
+### 🔸 GPM Memory
+Stores gradient subspaces to prevent forgetting.
+
+---
+
+## 🧪 Evaluation
+Metrics:
+- **AUC per class**
+- **Accuracy (%)**
+- **Accuracy matrix** (task-wise retention)
+
+Example:
+```
+mvtec/hazelnut   AUC = 0.9554
+loco/pushpins    AUC = 0.6085
+```
+
+---
+
+## 📁 Project Structure
+```
+configs/
+methods/
+models/
+utils/
+data/            # ignored
+results/         # ignored
+argument.py
+eval.py
+main.py
+README.md
+```
+
+---
+
+## ▶️ Running Training
+```
+python main.py --config configs/mvtec_loco.yaml
+```
+
+## ▶️ Running Evaluation
+```
+python eval.py --mem_dir results/mvtec+loco/Anomaly
+```
+
+---
+
+## 📊 Benchmarking
+Supports comparison with:
+- EWC  
+- SI  
+- Replay  
+- LwF  
+- GPM  
+- Joint training baseline  
+
+---
+
+## 🛠 Requirements
+- Python 3.9+
+- PyTorch 2.x
+- timm
+- numpy
+- scikit-learn
+- matplotlib
+
+Install:
 ```
 pip install -r requirements.txt
 ```
 
-## Getting pretrained ViT model
-ViT-B/16 model used in this paper can be downloaded at [here](https://storage.googleapis.com/vit_models/sam/ViT-B_16.npz).
+---
 
-## Run
-We provide the configuration file to run CAD on multiple benchmarks in `configs`.
+## 👤 Author
+**Numaan Suhaff**
 
-```
-python main.py --config-file ./configs/cad.yaml  --data_dir ../datasets/mvtec --mtd_dir ../datasets/mtd_ano_mask
-```
-You can run the method you need by modifying the configuration file.
+---
 
+## ⭐ Star the repo if you find it helpful!
