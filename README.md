@@ -1,6 +1,6 @@
 # Continual Anomaly Detection using ViT + DNE with Continual Learning (CL)
 
-## 📌 Overview
+## Overview
 This project implements a **Continual Anomaly Detection system** that can learn incrementally across industrial anomaly detection tasks without catastrophic forgetting.
 
 It is built using:
@@ -13,7 +13,7 @@ The system evaluates AUC, accuracy degradation, and CL memory performance.
 
 ---
 
-## 🎯 Objectives
+## Objectives
 1. Train anomaly detection sequentially across tasks  
 2. Prevent catastrophic forgetting using CL  
 3. Integrate **GPM memory** + DNE normalization  
@@ -22,7 +22,7 @@ The system evaluates AUC, accuracy degradation, and CL memory performance.
 
 ---
 
-## 📚 Datasets
+## Datasets
 ### **MVTec AD**
 Examples:
 - Hazelnut  
@@ -46,7 +46,7 @@ data/
 
 ---
 
-## 🧠 Methodology
+## Methodology
 
 ### 🔸 Vision Transformer (ViT)
 Extracts high-dimensional patch embeddings.
@@ -64,7 +64,7 @@ Stores gradient subspaces to prevent forgetting.
 
 ---
 
-## 🧪 Evaluation
+## Evaluation
 Metrics:
 - **AUC per class**
 - **Accuracy (%)**
@@ -78,7 +78,7 @@ loco/pushpins    AUC = 0.6085
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```
 configs/
 methods/
@@ -94,19 +94,19 @@ README.md
 
 ---
 
-## ▶️ Running Training
+## Running Training
 ```
 python main.py --config configs/mvtec_loco.yaml
 ```
 
-## ▶️ Running Evaluation
+## Running Evaluation
 ```
 python eval.py --mem_dir results/mvtec+loco/Anomaly
 ```
 
 ---
 
-## 📊 Benchmarking
+## Benchmarking
 Supports comparison with:
 - EWC  
 - SI  
@@ -117,7 +117,7 @@ Supports comparison with:
 
 ---
 
-## 🛠 Requirements
+## Requirements
 - Python 3.9+
 - PyTorch 2.x
 - timm
@@ -132,7 +132,7 @@ pip install -r requirements.txt
 
 ---
 
-## 👤 Author
+## Author
 **Numaan Suhaff**
 
 ---
