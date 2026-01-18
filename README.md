@@ -99,4 +99,4 @@ See requirements.txt
 ---
 
 ## Author
-Numaan Suhaff
+Suhaff
